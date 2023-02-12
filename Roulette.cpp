@@ -59,101 +59,87 @@ int main()
 		cout << "Entrez le resultat du tour de roulette : ";
 	}
 	cout << endl;
+		
+		if (result == 0) {
+			cout << "le chiffre entre est 0 rien ne se passe";
+			cout << endl;
+		}
+		else {
+			bool is_pair = result % 2 == 0;
+			bool is_rouge = result == 1 || result == 3 || result == 5 || result == 7 || result == 9 || result == 12 || result == 14 || result == 16 || result == 18 || result == 19 || result == 21 || result == 23 || result == 25 || result == 27 || result == 30 || result == 32 || result == 34 || result == 36;
+			bool is_premier_moitie = result >= 1 && result <= 18;
+			bool is_un_st = result >= 1 && result <= 12;
+			bool is_deux_st = result >= 13 && result <= 24;
+			bool is_trois_st = result >= 25 && result <= 36;
+			bool is_haut_ligne = result % 3 == 0;
+			bool is_millieu_ligne = result % 3 == 2;
+			bool is_bas_ligne = result % 3 == 1;
 
-		bool is_even = result % 2 == 0;
-		bool is_red = result == 1 || result == 3 || result == 5 || result == 7 || result == 9 || result == 12 || result == 14 || result == 16 || result == 18 || result == 19 || result == 21 || result == 23 || result == 25 || result == 27 || result == 30 || result == 32 || result == 34 || result == 36;
-		bool is_first_half = result >= 1 && result <= 18;
-
-		if (is_even)
-		{
-			++pair;
-			impair = 0;
-		}
-		else
-		{
-			pair = 0;
-			++impair;
-		}
-		if (is_red)
-		{
-			++rouge;
-			noir = 0;
-		}
-		else
-		{
-			rouge = 0;
-			++noir;
-		}
-		if (is_first_half)
-		{
-			++premier_moitie;
-			seconde_moitie = 0;
-		}
-		else
-		{
-			premier_moitie = 0;
-			++seconde_moitie;
-		}
-
-		bool is_un_st = result >= 1 && result <= 12;
-		bool is_deux_st = result >= 13 && result <= 24;
-		bool is_trois_st = result >= 25 && result <= 36;
-		bool is_haut_ligne = result % 3 == 0;
-		bool is_millieu_ligne = result % 3 == 2;
-		bool is_bas_ligne = result % 3 == 1;
-
-		if (is_un_st)
-		{
-			++un_st;
-		}
-		else
-		{
-			un_st = 0;
-		}
-		if (is_deux_st)
-		{
-			++deux_st;
-		}
-		else
-		{
-			deux_st = 0;
-		}
-		if (is_trois_st)
-		{
-			++trois_st;
-		}
-		else
-		{
-			trois_st = 0;
-		}
-		if (is_haut_ligne)
-		{
-			++haut_ligne;
-		}
-		else
-		{
-			haut_ligne = 0;
-		}
-		if (is_millieu_ligne)
-		{
-			++millieu_ligne;
-		}
-		else
-		{
-			millieu_ligne = 0;
-		}
-		if (is_bas_ligne)
-		{
-			++bas_ligne;
-		}
-		else
-		{
-			bas_ligne = 0;
+			if (is_pair) {
+				++pair;
+				impair = 0;
+			}
+			else {
+				pair = 0;
+				++impair;
+			}
+			if (is_rouge) {
+				++rouge;
+				noir = 0;
+			}
+			else {
+				rouge = 0;
+				++noir;
+			}
+			if (is_premier_moitie) {
+				++premier_moitie;
+				seconde_moitie = 0;
+			}
+			else {
+				premier_moitie = 0;
+				++seconde_moitie;
+			}
+			if (is_un_st) {
+				un_st = 0;
+			}
+			else {
+				++un_st;
+			}
+			if (is_deux_st) {
+				deux_st = 0;
+			}
+			else {
+				++deux_st;
+			}
+			if (is_trois_st) {
+				trois_st = 0;
+			}
+			else {
+				++trois_st;
+			}
+			if (is_haut_ligne) {
+				haut_ligne = 0;
+			}
+			else {
+				++haut_ligne;
+			}
+			if (is_millieu_ligne) {
+				millieu_ligne = 0;
+			}
+			else {
+				++millieu_ligne;
+			}
+			if (is_bas_ligne) {
+				bas_ligne = 0;
+			}
+			else {
+				++bas_ligne;
+			}
 		}
 		
 bool evenementApparu = false;
 
-for (int i = 0; i <= 10; i++)
+for (int i = 0; i <= 100; i++)
 {
 	double mise2 = miseInitiale2 * pow(multiplicateur2, i);
     double mise = miseInitiale * pow(multiplicateur, i);
@@ -206,7 +192,7 @@ for (int i = 0; i <= 10; i++)
         cout << "Mise " << mise2 << " euro sur la troisieme ligne 2 TO 1" << endl;
         evenementApparu = true;
     }
-    else if ((evenementApparu == false) && (i == 10))
+    else if ((evenementApparu == false) && (i == 100))
     {
         cout << "Ne mise pas !" << endl;
     }
