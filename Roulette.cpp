@@ -49,8 +49,6 @@ int main()
 			for (int i = 1; i < 36; i++) {
 				++chiffres[i];
 			}
-			cout << "le chiffre entre est 0 rien ne se passe";
-			cout << endl;
 			chiffres[0] = 0;
 		}
 		else {
