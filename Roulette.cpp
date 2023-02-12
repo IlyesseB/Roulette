@@ -19,35 +19,20 @@ int main()
 	int millieu_ligne = 0;
 	int bas_ligne = 0;
 
+	int chiffres[36] = {0};
+	for (int i = 0; i < 36; i++) {
+		chiffres[i] = 0;
+	}
 
-	int debut = 0;
-	cout << "A partir de combien de resultats successifs souhaites tu commencer les 1 chance sur 2: ";
-	cin >> debut;
+	int debut = 7;
+	int debut2 = 12;
+	int debut3 = 169;
 
-	double miseInitiale(0);
-	cout << "Pour quelle mise initiale : ";
-	cin >> miseInitiale;
+	double miseInitiale(0.10);
+	double multiplicateur(2);
+	double multiplicateur3(1.05);
 
-	double multiplicateur(0);
-	cout << "Pour quelle multiplicateur : ";
-	cin >> multiplicateur;
-	cout << endl;
-
-	int debut2 = 0;
-	cout << "A partir de combien de resultats successifs souhaites tu commencer les 1 chance sur 3: ";
-	cin >> debut2;
-
-	double miseInitiale2(0);
-	cout << "Pour quelle mise initiale : ";
-	cin >> miseInitiale2;
-
-	double multiplicateur2(0);
-	cout << "Pour quelle multiplicateur : ";
-	cin >> multiplicateur2;
-	cout << endl;
-
-	for (int i = 0; i < 100; ++i)
-	{
+	for (int i = 0; i < 10000; ++i){
 	cout << "Entrez le resultat du tour de roulette : ";
 	int result;
 	while (true) {
@@ -61,8 +46,12 @@ int main()
 	cout << endl;
 		
 		if (result == 0) {
+			for (int i = 1; i < 36; i++) {
+				++chiffres[i];
+			}
 			cout << "le chiffre entre est 0 rien ne se passe";
 			cout << endl;
+			chiffres[0] = 0;
 		}
 		else {
 			bool is_pair = result % 2 == 0;
@@ -75,6 +64,28 @@ int main()
 			bool is_millieu_ligne = result % 3 == 2;
 			bool is_bas_ligne = result % 3 == 1;
 
+			bool is_chiffre = false;
+			int index = -1;
+			for (int i = 0; i < 36; i++) {
+				if (i == result) {
+					is_chiffre = true;
+					index = i;
+					break;
+				}
+			}
+			if (is_chiffre) {
+				for (int i = 0; i < 36; i++) {
+					if (i == index) {
+					chiffres[i] = 0;
+					for (int j = 0; j < 36; j++) {
+						if (j != i) {
+						chiffres[j]++;
+						}
+					}
+					break;
+					}
+				}
+			}
 			if (is_pair) {
 				++pair;
 				impair = 0;
@@ -135,16 +146,22 @@ int main()
 			else {
 				++bas_ligne;
 			}
-		}
-		
+		}		
 bool evenementApparu = false;
 
-for (int i = 0; i <= 100; i++)
+for (int i = 0; i <= 10000; i++)
 {
-	double mise2 = miseInitiale2 * pow(multiplicateur2, i);
     double mise = miseInitiale * pow(multiplicateur, i);
+	double mise3 = miseInitiale * pow(multiplicateur3, i);
 
-    if (pair == debut + i) {
+
+	for (int k = 0; k < 36; k++) {
+		if (chiffres[k] == debut3 + i) {
+			cout << "Mise " << round(mise3 * pow(10, 1)) / pow(10, 1) << " euro sur le chiffre " << k << endl;
+			evenementApparu = true;
+		}
+	}
+	if (pair == debut + i) {
         cout << "Mise " << mise << " euro sur impair" << endl;
         evenementApparu = true;
     }
@@ -169,30 +186,30 @@ for (int i = 0; i <= 100; i++)
         evenementApparu = true;
     }
 	if (un_st == debut2 + i) {
-        cout << "Mise " << mise2 << " euro sur 1 ST 12" << endl;
+        cout << "Mise " << mise << " euro sur 1 ST 12" << endl;
         evenementApparu = true;
     }
 	if (deux_st == debut2 + i) {
-        cout << "Mise " << mise2 << " euro sur 2 ND 12" << endl;
+        cout << "Mise " << mise << " euro sur 2 ND 12" << endl;
         evenementApparu = true;
     }
 	if (trois_st == debut2 + i) {
-        cout << "Mise " << mise2 << " euro sur 3 RD 12" << endl;
+        cout << "Mise " << mise << " euro sur 3 RD 12" << endl;
         evenementApparu = true;
     }
 	if (haut_ligne == debut2 + i) {
-        cout << "Mise " << mise2 << " euro sur la premiere ligne 2 TO 1" << endl;
+        cout << "Mise " << mise << " euro sur la premiere ligne 2 TO 1" << endl;
         evenementApparu = true;
     }
 	if (millieu_ligne == debut2 + i) {
-        cout << "Mise " << mise2 << " euro sur la deuxieme ligne 2 TO 1" << endl;
+        cout << "Mise " << mise << " euro sur la deuxieme ligne 2 TO 1" << endl;
         evenementApparu = true;
     }
 	if (bas_ligne == debut2 + i) {
-        cout << "Mise " << mise2 << " euro sur la troisieme ligne 2 TO 1" << endl;
+        cout << "Mise " << mise << " euro sur la troisieme ligne 2 TO 1" << endl;
         evenementApparu = true;
     }
-    else if ((evenementApparu == false) && (i == 100))
+    else if ((evenementApparu == false) && (i == 10000))
     {
         cout << "Ne mise pas !" << endl;
     }
